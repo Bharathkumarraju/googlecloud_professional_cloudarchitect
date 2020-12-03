@@ -1,0 +1,19 @@
+resources:
+- name: {{ env["name"] }}
+  type: compute.v1.instance
+  properties:
+     machineType: zones/{{ properties["zone"] }}/machineTypes/{{ properties["machineType"] }}
+     zone: {{ properties["zone"] }}
+     networkInterfaces:
+      - network: {{ properties["network"] }}
+        subnetwork: {{ properties["subnetwork"] }}
+        accessConfigs:
+        - name: External NAT
+          type: ONE_TO_ONE_NAT
+     disks:
+      - deviceName: {{ env["name"] }}
+        type: PERSISTENT
+        boot: true
+        autoDelete: true
+        initializeParams:
+          sourceImage: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/family/debian-9
