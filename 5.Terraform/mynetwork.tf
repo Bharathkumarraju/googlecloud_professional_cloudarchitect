@@ -17,7 +17,7 @@ resource "google_compute_firewall" "mynetwork-allow-http-ssh-rdp-icmp" {
 
 # Create the mynet-us-vm instance
 module "mynet-us-vm" {
-  source           = "instance"
+  source           = "./instance"
   instance_name    = "mynet-us-vm"
   instance_zone    = "us-central1-a"
   instance_network = google_compute_network.mynetwork.self_link
@@ -25,7 +25,7 @@ module "mynet-us-vm" {
 
 # Create the mynet-eu-vm" instance
 module "mynet-eu-vm" {
-  source           = "instance"
+  source           = "./instance"
   instance_name    = "mynet-eu-vm"
   instance_zone    = "europe-west1-d"
   instance_network = google_compute_network.mynetwork.self_link
